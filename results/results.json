@@ -941,8 +941,8 @@
   }
  },
  "eta2": 0.3332484461887425,
- "final_year_months": 4,
- "final_year_seasons": "Spring, Winter",
+ "last_year_months": 4,
+ "last_year_seasons": "Spring, Winter",
  "eta2_complete": 0.3325627792802579,
  "season_mean_complete_Winter": 4880431.944444444,
  "season_mean_complete_Spring": 3543887.25,

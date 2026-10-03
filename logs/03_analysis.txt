@@ -5,7 +5,7 @@ chi2_sf self-check passed at df = 1, 2, 3 (published 5% critical points)
 ================================================================================
   contiguous monthly series: True   n = 232
   Jan-2008 step +38.10%
-  largest |change| EXCLUDING Jan-2008: 3.22%  (v3 wrongly said 1.5%)
+  largest |change| EXCLUDING Jan-2008: 3.22%
   months with |change| > 2%: 6 — listed:
       2008-01  +38.10%      4,120,654
       2021-06   +2.01%      4,798,220
@@ -58,7 +58,7 @@ chi2_sf self-check passed at df = 1, 2, 3 (published 5% critical points)
   Spring -Summer   -1,475,118  pointwise 95% CI [ -1,660,309,  -1,289,928]  p_bonf=0.0000  Welch p_bonf=0.0000
   Spring -Fall       -166,833  pointwise 95% CI [   -265,740,     -67,925]  p_bonf=0.0057  Welch p_bonf=0.7084
   Summer -Fall     +1,308,286  pointwise 95% CI [ +1,140,151,  +1,476,421]  p_bonf=0.0000  Welch p_bonf=0.0000
-  final year contributes 4 months (Spring, Winter), so Winter and
+  last year contributes 4 months (Spring, Winter), so Winter and
   Spring each carry one more year than Summer and Fall; seasonal Ns are 110/110/108/108.
   restricting to complete years changes the Winter mean by -31,323 MWh
 

@@ -106,8 +106,7 @@ put('cust_n_over2', int((cov.mom.abs() > 2).sum()))
 put('cust_excl_cluster_max', float(cov[~cov.index.isin(big.index)].mom.abs().max()))
 print(f'  contiguous monthly series: {R["cust_contiguous"]}   n = {len(cov)}')
 print(f'  Jan-2008 step {R["cust_jump_pct"]:+.2f}%')
-print(f'  largest |change| EXCLUDING Jan-2008: {R["cust_other_max_pct"]:.2f}%  '
-      f'(v3 wrongly said 1.5%)')
+print(f'  largest |change| EXCLUDING Jan-2008: {R["cust_other_max_pct"]:.2f}%')
 print(f'  months with |change| > 2%: {R["cust_n_over2"]} — listed:')
 for a in R['cust_anomalies']:
     print(f'      {a["year"]}-{a["month"]:02d}  {a["mom"]:+6.2f}%   {a["customers"]:>12,.0f}')
@@ -299,10 +298,10 @@ gm = df.sales.mean()
 ssb = sum(R['season'][s]['n'] * (R['season'][s]['mean'] - gm) ** 2 for s in order)
 put('eta2', ssb / ((df.sales.values - gm) ** 2).sum())
 last = df[df.year == 2026]
-put('final_year_months', int(len(last)))
-put('final_year_seasons', ', '.join(sorted(set(last.season))))
+put('last_year_months', int(len(last)))
+put('last_year_seasons', ', '.join(sorted(set(last.season))))
 bal = df.groupby('season').year.nunique().to_dict()
-print(f'  final year contributes {len(last)} months ({R["final_year_seasons"]}), so Winter and')
+print(f'  last year contributes {len(last)} months ({R["last_year_seasons"]}), so Winter and')
 print('  Spring each carry one more year than Summer and Fall; seasonal Ns are 110/110/108/108.')
 dfc = df[df.year < 2026]
 put('eta2_complete', float(sum((dfc.season == s).sum() * (dfc[dfc.season == s].sales.mean() - dfc.sales.mean()) ** 2
