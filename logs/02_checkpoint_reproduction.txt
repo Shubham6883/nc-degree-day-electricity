@@ -1,0 +1,74 @@
+
+================================================================================
+A. Does the supplied CSV match an independent reconstruction from raw files?
+================================================================================
+  CSV rows 436   reconstruction rows 436
+  max abs difference per column: {'year': 0, 'month': 0, 'cdd': '0', 'hdd': '0', 'tavg': '0', 'sales': 0, 'customers': '0', 'price': '0'}
+  missing-value pattern for customers identical: True
+  => CSV and raw reconstruction agree: True
+
+================================================================================
+B. Panel-level checkpoints
+================================================================================
+  N months                                   got         436.000000   want         436.000000   MATCH
+  duplicate year-month keys                  0
+  mean annual CDD (complete years)           got       1,476.000000   want       1,476.000000   MATCH
+  mean annual HDD (complete years)           got       3,303.194444   want       3,303.194444   MATCH
+  mean annual sales                          got  51,528,766.000000   want  51,528,766.000000   MATCH
+
+================================================================================
+C. Model checkpoints (HAC: Bartlett, maxlag 12, no prewhite, no small-sample factor)
+================================================================================
+  M1 CDD slope                               got       2,833.930164   want       2,833.930160   MATCH
+  M1 R2                                      got           0.140470   want           0.140470   MATCH
+  M1 HAC SE (CDD)                            got         217.935337   want         217.935340   MATCH
+  M3 CDD slope                               got       7,490.156087   want       7,490.156090   MATCH
+  M3 HDD slope                               got       3,596.119661   want       3,596.119660   MATCH
+  M3 trend                                   got      67,579.904071   want      67,579.904070   MATCH
+  M3 R2                                      got           0.854704   want           0.854704   MATCH
+  M3 HAC SE (CDD)                            got         292.284767   want         292.284770   MATCH
+  M3 HAC SE (HDD)                            got         151.276029   want         151.276030   MATCH
+  M4 CDD slope                               got       5,269.497029   want       5,269.497030   MATCH
+  M4 HDD slope                               got       3,411.630987   want       3,411.630990   MATCH
+  M4 R2                                      got           0.908312   want           0.908312   MATCH
+  M4 HAC SE (CDD)                            got         641.236972   want         641.236970   MATCH
+  M4 HAC SE (HDD)                            got         306.233511   want         306.233510   MATCH
+  M3 component ratio                         got           1.074462   want           1.074462   MATCH
+  M3 ratio CI lo (normal ref)                got           1.039699   want           1.039700   MATCH
+  M3 ratio CI hi (normal ref)                got           1.109225   want           1.109220   MATCH
+  M4 component ratio                         got           1.448908   want           1.448908   MATCH
+  M4 ratio CI lo (normal ref)                got           1.124061   want           1.124060   MATCH
+  M4 ratio CI hi (normal ref)                got           1.773754   want           1.773750   MATCH
+
+================================================================================
+D. July-January checkpoints
+================================================================================
+  mean paired difference                     got      19,123.583333   want      19,123.583330   MATCH
+  SD paired differences                      got     590,002.693060   want     590,002.693060   MATCH
+  two-sided paired p                         got           0.846927   want           0.846927   MATCH
+  TOST p at +/-0.3 SD                        got           0.058682   want           0.058682   MATCH
+  TOST p at +/-0.4 SD                        got           0.017039   want           0.017039   MATCH
+  TOST p at +/-0.5 SD                        got           0.004074   want           0.004074   MATCH
+
+================================================================================
+E. Proportional-trend contrast, Models 7 and 8
+================================================================================
+  per-customer window: n = 220, 2008-01 to 2026-04
+  time origin = mean of the analysis window = 2017.125000
+  (the CSV t_c column is centred on the FULL 1990-2026 window, mean 2008.1250; it is NOT reused here)
+
+  M7: contrast g = -0.00297602/yr, HAC SE = 0.00258617, resid df = 214
+      normal-ref 95% CI [-0.00804483, +0.00209278]
+      normal-ref p = 0.24984   |   t(214)-ref p = 0.25112
+      all six checkpoints match: True
+
+  M8: contrast g = -0.00675635/yr, HAC SE = 0.00283646, resid df = 203
+      normal-ref 95% CI [-0.01231572, -0.00119698]
+      normal-ref p = 0.01722   |   t(203)-ref p = 0.01814
+      all six checkpoints match: True
+
+  Does the time origin change the contrast? (sanity: it must, via the main effects)
+      interaction coefficients unchanged: True
+      but main effects shift, so contrast becomes -0.00260696 (p = 0.2639) instead of -0.00297602
+
+wrote contrasts.json

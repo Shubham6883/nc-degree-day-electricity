@@ -1,0 +1,1338 @@
+Two Arms of One Curve: Cooling and Heating Degree Days and Monthly
+Residential Electricity Sales in North Carolina, 1990–2026
+
+Shubham Jalan
+
+Independent Researcher
+
+September 2026
+
+Abstract
+
+Utilities in the Southeast plan around summer cooling, yet North
+Carolina heats an unusually large share of its housing stock with
+electricity. This study estimated both arms of the temperature response
+function for monthly statewide residential electricity sales and asked
+whether the cooling arm has been stable. The analysis used 436 months of
+public federal data (January 1990 to April 2026) from NOAA’s nClimDiv
+dataset and the U.S. Energy Information Administration’s Form EIA-861M.
+A cooling-degree-day-only regression explained R² = .14 of the variance
+in monthly sales. Adding heating degree days raised R² to .48, and
+adding a linear time trend raised it to .85; the two additions
+contributed comparable increments. In the trend specification the
+cooling slope was 7,490 MWh per cooling degree day, 95% CI [6,917,
+8,063], and the heating slope 3,596 MWh per heating degree day, 95% CI
+[3,300, 3,893], using heteroscedasticity- and autocorrelation-consistent
+standard errors throughout. Multiplying each slope by mean annual
+degree-day exposure gives model-implied heating and cooling components
+of comparable size, with heating the larger. That ordering held across
+specifications, but its magnitude did not: the implied ratio was 1.07
+under a linear trend and 1.45 once calendar-month effects were added, so
+no single ratio is reported as a headline. July and January mean monthly
+sales were statistically equivalent within an exploratory, post hoc
+margin of ±0.4 standard deviations of the paired difference, p = .017.
+Per-customer sensitivity to cooling degree days declined over January
+2008 to April 2026 in both pooled specifications, by 15% and 27%.
+Whether that proportional decline exceeded the corresponding heating
+decline depended on the specification: the contrast was p = .250 without
+calendar-month effects and p = .017 with them. These results describe
+associations in monthly energy. They do not establish forecasting
+accuracy, and they carry no implication for peak power or generating
+capacity.
+
+Keywords: temperature response function, cooling degree days, heating
+degree days, degree-day regression, North Carolina, residential
+electricity demand
+
+Two Arms of One Curve: Cooling and Heating Degree Days and Monthly
+Residential Electricity Sales in North Carolina, 1990–2026
+
+Residential electricity demand in the southeastern United States is
+rising, and air conditioning drives a substantial share of it.
+Nationally, air conditioning accounts for approximately 19% of
+residential electricity consumption (U.S. Energy Information
+Administration [EIA], 2024), and 93% of households in the South Census
+region use it (EIA, 2022). Duke Energy projects that customer energy
+needs across the Carolinas will grow over the next 15 years at roughly
+eight times the rate of the previous 15 (Duke Energy, 2025).
+
+The standard tool for relating temperature to demand is the degree day.
+A day’s cooling degree day (CDD) value equals the number of degrees by
+which its mean temperature exceeds a base of 65 °F; heating degree days
+(HDD) count degrees below that base, and monthly totals sum the daily
+values (EIA, 2023b). Because demand rises as temperature moves away from
+the balance point in either direction, the temperature–demand
+relationship traces a curve with two arms, cooling on the right and
+heating on the left (Hu et al., 2024). Applied degree-day work in the
+Southeast has often concentrated on the cooling arm, which is a
+defensible simplification in Florida or Texas but a consequential
+modeling choice in a state that heats with electricity.
+
+North Carolina is such a state. In the 2020 Residential Energy
+Consumption Survey, 38% of its housing units reported a central heat
+pump as their main heating equipment, a share below South Carolina (41%)
+and Alabama (39%) but among the higher ones nationally (EIA, 2023a).
+That figure counts one category of equipment and is not the share of
+homes heating with electricity, which this source does not report.
+Meanwhile the state’s cooling degree days have trended upward and
+heating degree days downward (Kunkel et al., 2020), so the balance
+between the arms need not be fixed.
+
+This study asks three questions. First, what changes in the estimated
+temperature response when heating degree days and temporal structure are
+included alongside cooling degree days? Second, how do the model-implied
+heating and cooling components of annual sales compare, and how
+sensitive is that comparison to specification? Third, has the
+per-customer response to degree days been stable over the period for
+which customer counts are available? The design is observational and
+uses statewide monthly aggregates, so the results describe associations
+rather than causal effects, and they concern monthly energy in
+megawatt-hours rather than peak power.
+
+Background
+
+Degree-Day Models of Electricity Demand
+
+Temperature predicts electricity demand strongly, though the strength
+varies by region, season, and specification. Cawthorne et al. (2021)
+modeled seasonal demand across balancing authorities in Tennessee and
+Texas and reported that, after regional population growth accounted for
+variability at decadal time scales, temperature explained 44% to 67% of
+demand variability at seasonal time scales (Figure 1). That range
+describes temperature’s share of population-adjusted variability using
+population-weighted temperature, so it is not a transferable threshold
+against which a coefficient of determination from unadjusted state
+totals can be judged. Fache and Bhat (2024) applied the degree-day
+method to Florida within a regression that also included population,
+employment, gross domestic product, electricity price, and daylight
+hours, and found temperature among the strongest predictors of
+residential demand.
+
+Figure 1
+
+Residuals of Electricity Demand Versus Population-Weighted Average
+Temperature for Tennessee (A: Winter, B: Summer) and Texas (C: Winter,
+D: Summer)
+
+[]
+
+Note. From Cawthorne et al. (2021), Frontiers in Sustainable Cities,
+licensed under CC BY 4.0. The winter panels slope downward and the
+summer panels slope upward, illustrating the two-armed response.
+
+The mechanism is the balance-point relationship: buildings require
+little temperature-driven energy near the balance point, and demand
+rises as temperature departs from it in either direction (EIA, 2023b).
+Hu et al. (2024) analyzed the dynamics of this temperature response
+function for 36 European countries, building scenario assumptions about
+thermal insulation, heating electrification, space-cooling penetration,
+and passive cooling into projections to 2100. Their projections imply
+that rising space-cooling penetration raises cooling-season demand in
+cooling-dominated regions while passive-cooling measures and improved
+insulation offset part of that increase. Because that study is a
+forward-looking scenario analysis for Europe rather than an empirical
+estimate of historical change in the United States, it motivates the
+question of whether a response function is stable without supplying a
+result that a North Carolina estimate could confirm or contradict.
+
+Figure 2
+
+Illustrative Diagram of a Two-Armed Temperature Response Function
+
+[]
+
+Note. Author-created schematic drawn from the balance-point concept
+(EIA, 2023b) and the temperature response function discussed by Hu et
+al. (2024). The curves are illustrative and are not fitted to data, are
+not a depiction of equipment behavior, and are not a finding of this
+study. A steeper and a flatter cooling arm are shown only to make the
+question of stability concrete.
+
+Methodological Considerations
+
+Three issues shape a defensible design. First, monthly energy series are
+strongly seasonal and autocorrelated, and Granger and Newbold (1974)
+showed that regressing one trending or cyclical series on another can
+produce correlations with inflated significance. Second, a cooling-only
+model omits the heating side of a two-armed relationship. Because the
+omitted arm is correlated with the included one through the annual
+cycle, the omission changes the surviving coefficient rather than merely
+narrowing the scope of the study. Third, unequal variability across
+months is common in monitored household load data (Li et al., 2018),
+which motivates variance-robust rather than pooled-variance comparisons;
+that study used 58 English households monitored from July to December
+2011, so it establishes the general phenomenon rather than a North
+Carolina parameter.
+
+Figure 3
+
+Boxplots of Per-Household Mean Electrical Load (kW) for Monitored and
+Synthetic Households, July–December 2011
+
+[]
+
+Note. From Li et al. (2018), Energy and Buildings, licensed under CC BY
+4.0.
+
+Published evidence concentrates on Tennessee and Texas (Cawthorne et
+al., 2021), Florida (Fache & Bhat, 2024), and European systems (Colelli
+et al., 2023; Hu et al., 2024). Few analyses estimate both arms for
+North Carolina at the monthly statewide level or examine whether the
+arms have shifted. This study addresses that gap using public federal
+data.
+
+Method
+
+Data Sources
+
+Statewide monthly degree days and mean temperature came from the
+National Oceanic and Atmospheric Administration’s nClimDiv dataset: the
+statewide cooling degree day (climdiv-cddcst), heating degree day
+(climdiv-hddcst), and mean temperature (climdiv-tmpcst) files, version
+1.0.0 dated June 4, 2026, downloaded in June 2026 and filtered to state
+code 031. Records carry a ten-character identifier in which characters
+1–3 give the state, character 4 the division (0 for statewide),
+characters 5–6 the element, and characters 7–10 the year; the three
+files carry element codes 26, 25, and 02 respectively, consistent with
+their filenames. Values of −9999 denote missing data and were recoded.
+nClimDiv statewide values are area-weighted across climate divisions
+rather than population-weighted.
+
+Monthly residential electricity sales, customer counts, and average
+revenue per kilowatt-hour came from the U.S. Energy Information
+Administration’s Form EIA-861M, in two extracts covering January 1990
+through December 2009 and January 2010 onward, downloaded in June 2026
+and filtered to North Carolina. Sales are in megawatt-hours and revenue
+in cents per kilowatt-hour. The two extracts share identical column
+headers, contain no overlapping year–month keys, and yielded no
+duplicate rows on concatenation.
+
+Data Preparation and a Discontinuity in Customer Counts
+
+The climate and sales series were joined on year and month. The join is
+one-to-one: the North Carolina extract contains 436 unique year–month
+records, all of which matched, with no duplicate keys, no interior gaps
+in the monthly sequence, and no negative degree-day values. The analysis
+sample is therefore 436 consecutive months, January 1990 through April
+2026. Annual quantities use only the 36 complete calendar years, 1990
+through 2025, because 2026 contributes four months.
+
+Customer counts are reported from January 2007. Month-over-month
+percentage changes were computed after sorting by year and month and
+confirming that the customer series is contiguous with no missing
+interior months. Six months show an absolute change above 2% (Table 1):
+a step of +38.1% at January 2008, and a cluster of five values between
+June 2021 and February 2022 ranging from −2.79% to +3.22%. Excluding
+January 2008, the largest absolute month-over-month change is 3.22%;
+excluding January 2008 and the 2021–22 cluster as well, it falls to
+1.48%.
+
+The two anomalies differ in kind. The 2021–22 values oscillate in sign
+and net to +2.88% across the twelve months from May 2021 to April 2022,
+which is close to the surrounding annual growth rate; they move the
+series up and down rather than shifting its level. January 2008 is a
+one-way step that persists. Its size is difficult to reconcile with
+customer growth, and a change in survey coverage is the most obvious
+candidate, but no EIA documentation of a frame change in that period was
+retrieved for this study, so the cause is recorded as suspected rather
+than established.
+
+The decision to exclude months before January 2008 does not rest on that
+diagnosis. In the same month, January sales rose +12.7% year over year
+while the customer count rose +40.5%. Customer counts increased far more
+sharply than sales, producing a discontinuity in sales per customer, so
+a per-customer trend estimated across the break is not interpretable
+whatever produced the step. All per-customer analyses therefore use the
+220 months from January 2008 onward rather than the 232 months available
+from January 2007. The 2021–22 values are retained, because they are
+unusual but not evidently erroneous and they do not shift the level of
+the series; a sensitivity analysis removing them is reported in the
+Results. No observation was removed on the basis of its effect on any
+test statistic.
+
+Table 1
+
+Month-Over-Month Changes in Reported Residential Customer Counts
+Exceeding 2%
+
+  Month     Customers   Change from prior month
+  --------- ----------- -------------------------
+  2008-01   4,120,654   +38.10%
+  2021-06   4,798,220   +2.01%
+  2021-11   4,712,982   -2.25%
+  2021-12   4,838,442   +2.66%
+  2022-01   4,703,413   -2.79%
+  2022-02   4,854,867   +3.22%
+
+Note. Computed on the contiguous January 2007 to April 2026 customer
+series after sorting by year and month. These are the only months whose
+absolute change exceeds 2%. Excluding January 2008 the maximum absolute
+change is 3.22%; excluding January 2008 and the 2021–22 cluster it is
+1.48%.
+
+Figure 4
+
+Residential Customer Counts Reported in EIA-861M, January 2007 to April
+2026
+
+[]
+
+Note. The series steps up between December 2007 and January 2008 and
+does not return. The five values between June 2021 and February 2022
+that also exceed 2% in absolute terms oscillate in sign and are
+retained. Months before January 2008, shaded, are excluded from all
+per-customer analyses.
+
+Specifications
+
+All tests used α = .05. The analysis proceeds through a specification
+ladder so that the consequences of the conventional cooling-only model
+can be measured rather than assumed. Table 2 defines every model in one
+place. Models 1 through 5 use monthly statewide sales as the outcome;
+Models 6 through 8 use sales per residential customer over the shorter
+window for which customer counts are usable.
+
+Table 2
+
+Model Definitions
+
+  Model   Outcome              Predictors                                                    Sample
+  ------- -------------------- ------------------------------------------------------------- --------------------------
+  1       Monthly sales        CDD                                                           436 months
+  2       Monthly sales        CDD, HDD                                                      436 months
+  3       Monthly sales        CDD, HDD, centred linear year                                 436 months
+  4       Monthly sales        CDD, HDD, centred linear year, 11 calendar-month indicators   436 months
+  5       Monthly sales        CDD                                                           180 May–September months
+  6       Sales per customer   CDD, HDD, centred linear year                                 220 months
+  7       Sales per customer   Model 6 plus CDD × year and HDD × year                        220 months
+  8       Sales per customer   Model 7 plus 11 calendar-month indicators                     220 months
+
+Note. CDD and HDD are monthly degree-day totals relative to a 65 °F
+base. The linear year term is centred within each estimation sample: at
+the mean of the 1990–2026 window for Models 1–5 and at 2017.125 for
+Models 6–8. Centring does not change fitted values or interaction
+coefficients, but it does change what the main effects represent, which
+matters for the proportional-trend contrast defined in the Results.
+Models 6–8 use the January 2008 to April 2026 window described above.
+
+Models 3 and 4 are reported together throughout rather than one being
+designated correct, because they identify the degree-day coefficients
+from different variation. In Model 3 the coefficients are identified
+from all monthly variation, including the annual cycle, so any recurring
+seasonal influence on sales that co-moves with degree days — daylight
+hours, school and holiday calendars, seasonal occupancy — is available
+to be absorbed by the degree-day terms. In Model 4 the calendar-month
+indicators absorb everything common to a given month across years, so
+the degree-day coefficients are identified only from year-to-year
+deviations within each calendar month, after the trend. Interpreting
+Model 4’s coefficients as the weather response requires assuming that
+the within-calendar-month association is the quantity of interest and
+that the response does not differ systematically between the seasonal
+and the within-month margins.
+
+The difference between the two sets of estimates therefore demonstrates
+sensitivity to how seasonality is handled. It does not establish that
+either model is unbiased, and the two estimates should not be read as
+lower and upper bounds on an underlying response: no result here
+identifies a true parameter, and coefficient heterogeneity or
+misspecification could place the quantity of interest outside the range
+they span. Both are reported, with the range described as a range across
+the specifications examined.
+
+Inference
+
+Ordinary least squares standard errors assume independent errors, which
+monthly energy data violate. Unless stated otherwise, every interval and
+p value reported for a time-series model in this paper uses Newey–West
+heteroscedasticity- and autocorrelation-consistent (HAC) standard errors
+with a Bartlett kernel, a maximum lag of 12 months, no prewhitening, and
+no finite-sample covariance multiplier, implemented directly from the
+sandwich formula (Newey & West, 1987). Robust Wald statistics are
+referred to the standard normal distribution; where the
+residual-degrees-of-freedom t reference would change a reported value it
+is given alongside. The covariance correction and the choice of
+reference distribution are separate decisions and are labelled
+separately. Ordinary standard errors appear beside the HAC ones in Table
+4 so the two can be compared.
+
+The 12-month maximum lag was fixed before the analyses reported here, on
+the ground that it spans one seasonal cycle of monthly data. It was not
+preregistered, and earlier drafts of this project examined bandwidth
+sensitivity, so results across maximum lags from 3 to 24 months are
+reported wherever a conclusion could plausibly turn on the choice. HAC
+estimation corrects the standard errors for serial correlation and
+heteroscedasticity of unknown form. It does not repair a misspecified
+conditional mean, does not make a model substantively correct, and does
+not license reading a robust standard error as evidence that the
+specification is right.
+
+Serial correlation does not have a uniform effect on standard errors.
+For the cooling-only Model 1 the HAC standard error is smaller than the
+ordinary one at a 12-month lag and larger at shorter lags; for Models 3
+and 4 it is larger at every lag examined. Both patterns are reported. An
+AR(1) feasible generalized least squares estimate is also reported for
+Models 1 and 3. Because that estimator imposes a different error
+structure as well as a different weighting, a difference between it and
+ordinary least squares indicates sensitivity to assumptions about the
+errors; it does not identify the source or direction of any bias.
+
+Model 5 is estimated on the May-to-September months only. Because those
+rows are not contiguous in calendar time, forming lag products across
+consecutive rows of the filtered series would treat September and the
+following May as one month apart. Model 5 is therefore estimated with
+lag products formed at the actual calendar distance between the retained
+months: every ordered pair whose true separation is one to twelve months
+contributes at its Bartlett weight, including pairs that straddle the
+autumn-to-spring gap, such as September to the following May at a
+distance of eight months. Restricting products to pairs within a single
+May-to-September block would avoid treating that gap as one month but
+would discard those eligible cross-year pairs; both that variant and the
+naive calculation are reported in the Results so the differences are
+visible. Model 5 is retained as a descriptive comparison with earlier
+degree-day work rather than as a basis for any substantive claim.
+
+Model-Implied Components
+
+Multiplying a degree-day coefficient by mean annual degree-day exposure
+yields the portion of mean annual sales that the fitted model attributes
+to that term. These are additive regression components under the
+assumptions of the model, not metered end-use quantities. Degree-day
+exposures are treated as fixed historical totals, so the reported
+uncertainty reflects coefficient uncertainty only and excludes
+uncertainty about specification. The heating-to-cooling component ratio
+is a nonlinear function of two estimated coefficients, so its standard
+error was obtained by the delta method using the full joint covariance
+of the two coefficients, including their covariance, evaluated at the
+HAC covariance matrix.
+
+Because a ratio can behave poorly under the delta method, a moving-block
+bootstrap is reported alongside it. The scheme resamples blocks of 12
+consecutive observations of the paired outcome and design rows, with
+replacement, concatenating them to the original sample length; 4,000
+resamples were drawn with a fixed random seed, and the interval runs
+between the 2.5 and 97.5 percentiles of the resampled ratio. Because
+blocks are reassembled in random order, the deterministic trend
+regressor is no longer in calendar order within a resample, so the
+procedure preserves short-range dependence but not the global trend
+structure. The bootstrap is therefore a secondary check on the
+delta-method interval rather than an independent estimate, and agreement
+between the two says nothing about specification uncertainty, which is
+the larger source of disagreement in these results.
+
+Diagnostics and Robustness
+
+Residual diagnostics for Models 1, 3, and 4 appear in Appendix Figures
+A1 through A3: residuals against fitted values, a residual histogram
+with a matched normal curve, a normal quantile–quantile plot, and the
+residual autocorrelation function. Robustness checks include a quadratic
+time trend, a per-calendar-day normalization of both sales and degree
+days, dropping the final three months of the series because EIA-861M
+reports recent months as preliminary and later revises them,
+correlations computed after removing a linear trend and on first and
+twelve-month differences, and a comparison of total and per-customer
+outcomes on a matched window.
+
+Results
+
+Descriptive Statistics
+
+The analysis sample contains 436 months from January 1990 through April
+2026. Over the 36 complete calendar years, North Carolina averaged 1,476
+cooling degree days and 3,303 heating degree days per year, a ratio of
+2.24 heating to cooling degree days. Monthly residential sales averaged
+4,304,017 MWh (SD = 1,162,451). Table 3 reports the monthly variables,
+and Figure 5 plots sales against mean monthly temperature. Both arms are
+visible in the raw data.
+
+Table 3
+
+Descriptive Statistics for Monthly Climate and Electricity Variables,
+January 1990–April 2026
+
+  Variable                       n     M           SD          Min         Max
+  ------------------------------ ----- ----------- ----------- ----------- -----------
+  Residential sales (MWh)        436   4,304,017   1,162,451   2,119,750   7,661,069
+  Cooling degree days            436   122.1       153.7       0           512
+  Heating degree days            436   276.9       279.8       0           969
+  Mean temperature (°F)          436   59.6        13.2        33.6        80.7
+  Mean monthly sales by season                                             
+  Winter (Dec–Feb)               110   4,911,755   1,048,329               
+  Spring (Mar–May)               110   3,554,993   717,349                 
+  Summer (Jun–Aug)               108   5,030,111   1,141,898               
+  Fall (Sep–Nov)                 108   3,721,825   845,677                 
+
+Note. Degree days are relative to a 65 °F base. Minimum and maximum are
+omitted for the seasonal rows. Seasonal standard deviations are the
+standard deviations of monthly sales within each season across the study
+window.
+
+Figure 5
+
+Monthly Residential Electricity Sales Against Mean Monthly Temperature
+
+[]
+
+Note. Each point is one month, colored by meteorological season. The
+solid curve is a locally weighted regression fit, shown as a descriptive
+summary with no inferential interpretation. The dashed line marks the 65
+°F degree-day base. Sales are plotted in gigawatt-hours (1 GWh = 1,000
+MWh); statistics in the text are in megawatt-hours.
+
+What Changes When Heating and Temporal Structure Are Added
+
+Monthly CDD alone (Model 1) explained R² = .14 of the variance in
+monthly sales, with a slope of 2,834 MWh per cooling degree day, 95% CI
+[2,407, 3,261]. Figure 6 shows why the fit is poor: the 77 months
+recording zero cooling degree days span nearly the full range of the
+outcome, because a cooling variable cannot distinguish a mild November
+from a severe January.
+
+Figure 6
+
+Monthly Cooling Degree Days and Residential Electricity Sales
+
+[]
+
+Note. Points are colored by meteorological season. The line and shaded
+band show the Model 1 ordinary least squares fit and its 95% ordinary
+least squares confidence band; inference reported in the text uses HAC
+standard errors and does not correspond to this band.
+
+Adding heating degree days raised R² from .14 to .48, and adding a
+linear trend raised it to .85; calendar-month effects raised it further
+to .91 (Table 4). The cooling slope also moved substantially. Model 3
+places it 164% above the Model 1 value, which is equivalent to saying
+that the Model 1 estimate lies 62% below the Model 3 estimate. The two
+figures describe the same gap from opposite directions and are easily
+confused. The movement is consistent with omitted-variable bias from
+excluding the heating arm, since zero-CDD months carry high heating
+loads and pull the fitted intercept upward at the expense of the slope,
+but the size of any bias relative to an unknown true parameter cannot be
+read off a comparison between two fitted models.
+
+An AR(1) feasible generalized least squares fit of Model 1 gives a
+cooling slope of 4,759 MWh per cooling degree day against the ordinary
+least squares value of 2,834, with an estimated autocorrelation
+parameter of 0.77. Applied to Model 3 the same estimator gives 7,172
+against 7,490, a much smaller change. The Model 1 estimate is therefore
+sensitive to the assumed error structure and the Model 3 estimate is
+comparatively stable, which is evidence about specification sensitivity
+rather than about the direction of bias in either estimate.
+
+Table 4
+
+Regression Models Predicting Monthly Residential Electricity Sales
+
+  -----------------------------------------------------------------------------------------
+  Model   Specification                              CDD     HDD     Year      R²    DW
+  ------- ------------------------------------------ ------- ------- --------- ----- ------
+  1       Sales ~ CDD                                2,834   —       —         .14   0.53
+                                                     (336)                           
+                                                     [218]                           
+
+  2       Sales ~ CDD + HDD                          7,655   3,595   —         .48   0.42
+                                                     (387)   (212)                   
+                                                     [311]   [176]                   
+
+  3       Sales ~ CDD + HDD + year                   7,490   3,596   67,580    .85   1.47
+                                                     (205)   (113)   (2,032)         
+                                                     [292]   [151]   [3,077]         
+
+  4       Sales ~ CDD + HDD + year + month effects   5,269   3,412   68,905    .91   1.26
+                                                     (516)   (251)   (1,674)         
+                                                     [641]   [306]   [3,099]         
+
+  5       Cooling season: Sales ~ CDD                6,721   —       —         .46   0.32
+                                                     (548)                           
+                                                     [340]                           
+  -----------------------------------------------------------------------------------------
+
+Note. N = 436 months for Models 1–4 and 180 May–September months for
+Model 5; full definitions in Table 2. Entries are unstandardized
+coefficients in MWh per degree day, or MWh per year for the trend, with
+ordinary least squares standard errors in parentheses and
+heteroscedasticity- and autocorrelation-consistent standard errors in
+brackets. HAC errors use a Bartlett kernel with a 12-month maximum lag;
+for Model 5 they are computed at actual calendar distance between the
+retained May–September months, as described in the Method. All
+coefficients shown are significant at p < .001 under both estimators. DW
+= Durbin–Watson statistic; values below 2 indicate positive residual
+autocorrelation. Models 6–8, which use sales per customer over a shorter
+window, are reported in Table 8.
+
+Table 4 also shows that the HAC and ordinary standard errors do not
+stand in a fixed relationship. For Model 1 the HAC standard error on the
+cooling slope is smaller than the ordinary one at the 12-month
+bandwidth, 218 against 336, and larger at shorter bandwidths, reaching
+473 at three months. For Model 3 the HAC standard error exceeds the
+ordinary one at every bandwidth examined, rising from 228 at three
+months to 382 at 24 months against an ordinary value of 205. The
+direction of the correction is therefore a property of the model and
+bandwidth rather than a general consequence of autocorrelation.
+
+Figure 7
+
+Added-Variable Plots for the Cooling and Heating Terms of Model 3
+
+[]
+
+Note. Each panel plots residualized sales against one residualized
+degree-day variable, holding the other degree-day variable and the
+linear trend constant. Lines and shaded bands are ordinary least squares
+fits with 95% ordinary least squares bands; the coefficient intervals
+printed in each panel are HAC intervals and are the ones reported in the
+text.
+
+Model-Implied Heating and Cooling Components
+
+In Model 3 each cooling degree day is associated with 7,490 MWh of
+monthly sales, 95% CI [6,917, 8,063], and each heating degree day with
+3,596 MWh, 95% CI [3,300, 3,893], a slope ratio of 2.08. In Model 4 the
+same slopes are 5,269 and 3,412, a ratio of 1.54. Multiplying each slope
+by mean annual degree-day exposure converts these into model-implied
+components of mean annual sales (Table 5, Figure 8).
+
+Table 5
+
+Model-Implied Annual Components of Residential Sales Under Two
+Specifications
+
+  Quantity                          Model 3        Model 4
+  --------------------------------- -------------- --------------
+  Cooling slope (MWh per CDD)       7,490          5,269
+  Heating slope (MWh per HDD)       3,596          3,412
+  Slope ratio (cooling ÷ heating)   2.08           1.54
+  Cooling component (million MWh)   11.1           7.8
+  Heating component (million MWh)   11.9           11.3
+  Cooling share of annual sales     21.5%          15.1%
+  Heating share of annual sales     23.1%          21.9%
+  Heating ÷ cooling component       1.07           1.45
+  HAC delta-method 95% CI           [1.04, 1.11]   [1.12, 1.77]
+  Moving-block bootstrap 95% CI     [1.04, 1.10]   [1.15, 1.85]
+
+Note. Components are the fitted coefficient multiplied by mean annual
+exposure over the 36 complete calendar years (1,476 CDD and 3,303 HDD),
+against mean annual sales of 51,528,766 MWh. These are additive
+regression components under each model’s assumptions, not metered
+end-use quantities. Degree-day exposures are treated as fixed historical
+totals, so intervals reflect coefficient uncertainty only and exclude
+uncertainty about specification. The delta-method interval uses the full
+joint HAC covariance of the two coefficients, including their
+covariance, which is substantial (HAC correlation 0.92 in Model 3 and
+0.45 in Model 4). The bootstrap uses 12-month moving blocks and 4,000
+resamples.
+
+Figure 8
+
+Model-Implied Decomposition of Mean Annual Residential Sales Under Two
+Specifications
+
+[]
+
+Note. Cooling and heating components are the fitted degree-day
+coefficients multiplied by mean annual degree-day exposure. The
+remainder is the balance of mean annual sales not attributed to either
+degree-day term by that model; it is a modelling residual and is not a
+measurement of weather-independent appliance consumption.
+
+Both specifications place the heating component above the cooling
+component, so the ordering is stable. Its magnitude is not: the implied
+ratio is 1.07 under Model 3, a gap of about 7%, and 1.45 under Model 4,
+a gap of about 45%. Neither interval in Table 5 conveys that spread,
+because each describes coefficient uncertainty within one model. For
+that reason no single ratio is reported as a headline result. The
+defensible statement is that the two components are of broadly
+comparable size, with the heating component at least as large as the
+cooling component, across the specifications examined. Three further
+checks left the Model 3 ratio essentially unchanged: a quadratic trend
+gave 1.07, normalizing both series per calendar day gave 1.09, and
+dropping the final three months, which EIA reports as preliminary, gave
+1.07. The spread between Models 3 and 4 is thus specific to the
+treatment of calendar-month effects and is not an artifact of trend
+form, month length, or provisional data.
+
+Seasonal Structure
+
+Table 6 reports differences between seasonal mean monthly sales with HAC
+intervals, obtained by regressing sales on season indicators and
+applying the same 12-month Bartlett kernel. This replaces the Welch
+procedure used in earlier versions of this analysis. Welch tests relax
+the equal-variance assumption but still treat observations as
+independent, which monthly sales are not, and the choice of procedure
+changes one conclusion: the Spring–Fall difference is not
+distinguishable from zero under a Welch test, p = .708, but is
+distinguishable under HAC inference, p = .006. The Winter–Summer
+difference remains indistinguishable from zero under both, with a HAC
+interval of [-294,966, 58,253] MWh.
+
+Table 6
+
+Differences Between Seasonal Mean Monthly Sales, With Dependence-Robust
+Intervals
+
+  Comparison        M difference (MWh)   HAC 95% CI                 p (HAC)   p (Welch)
+  ----------------- -------------------- -------------------------- --------- -----------
+  Winter − Spring   1,356,762            [1,203,484, 1,510,040]     < .001    < .001
+  Winter − Summer   -118,356             [-294,966, 58,253]         1.00      1.00
+  Winter − Fall     1,189,929            [1,019,691, 1,360,168]     < .001    < .001
+  Spring − Summer   -1,475,118           [-1,660,309, -1,289,928]   < .001    < .001
+  Spring − Fall     -166,833             [-265,740, -67,925]        .006      .708
+  Summer − Fall     1,308,286            [1,140,151, 1,476,421]     < .001    < .001
+
+Note. Differences are between mean monthly sales within each season
+across the study window. HAC intervals and p values come from a
+regression of monthly sales on season indicators with Newey–West
+standard errors (Bartlett kernel, 12-month bandwidth); Welch p values
+are from pairwise unequal-variance t tests treating months as
+independent. Both sets of p values are Bonferroni-corrected for six
+comparisons. The between-season share of total variance in monthly sales
+is .33, reported as a descriptive proportion computed from the classical
+sums of squares; it is not an effect size attached to either test and
+carries no dependence-robust interpretation.
+
+Figure 9
+
+Seasonal Distributions of Monthly Residential Sales and Pairwise
+Differences
+
+[]
+
+Note. Left: boxes span the interquartile range, horizontal lines mark
+medians, and diamonds mark seasonal means. Right: points are differences
+in seasonal mean monthly sales with Newey–West 95% intervals,
+uncorrected for multiplicity; the Bonferroni-corrected p values appear
+in Table 6.
+
+Across 36 matched years, mean July sales (5,432,146 MWh) exceeded mean
+January sales (5,413,023 MWh) by 19,124 MWh (SD = 590,003), which is not
+distinguishable from zero, t(35) = 0.19, p = .847 (two-sided), 95% CI
+[-180,505, 218,752]. The annual differences show no material serial
+dependence (lag-1 r = -0.05, Durbin–Watson = 2.03), so treating the 36
+paired differences as independent is defensible even though the
+underlying monthly series is not.
+
+A failure to reject is not evidence of equality, so equivalence was
+tested directly with two one-sided tests (Lakens, 2017). Equivalence was
+established against a margin of ±0.4 standard deviations of the paired
+difference, p = .017, and against ±0.5 standard deviations, p = .004;
+equivalence was not established against ±0.3 standard deviations, p =
+.059. At α = .05 these conclusions correspond to the 90% confidence
+interval on the mean difference, [-147,018, 185,266] MWh, lying inside
+the stated bounds; the 95% interval, [-180,505, 218,752] MWh, also falls
+inside the ±0.4 and ±0.5 bounds, which is a separate and slightly
+stronger statement (Figure 10, Table 7). The margins were not specified
+in advance. They describe how large a difference these data can rule out
+rather than testing a threshold justified on planning or engineering
+grounds, and they should be read as exploratory. None of this
+establishes that the two months are exactly equal, and all of it
+concerns mean monthly energy for two specific calendar months, not
+seasonal maxima, peak power, or any other pair of months.
+
+Table 7
+
+Paired Comparison and Equivalence Tests, July Versus January Monthly
+Sales
+
+  Test                          Bound (MWh)   p      Conclusion
+  ----------------------------- ------------- ------ -----------------------------
+  Paired t test, t(35) = 0.19   —             .847   Fail to reject the null
+  Equivalence test, ±0.3 SD     ±177,001      .059   Equivalence not established
+  Equivalence test, ±0.4 SD     ±236,001      .017   Equivalence established
+  Equivalence test, ±0.5 SD     ±295,001      .004   Equivalence established
+
+Note. n = 36 matched years, 1990–2025. Mean difference = 19,124 MWh, 95%
+CI [-180,505, 218,752], standardized mean difference = 0.03. Equivalence
+bounds are multiples of the standard deviation of the paired difference,
+converted to megawatt-hours; they were chosen after seeing the data and
+are exploratory. For equivalence rows p is the larger of the two
+one-sided test p values.
+
+Figure 10
+
+July Versus January Sales, Paired by Year, With Equivalence Bounds
+
+[]
+
+Note. Left: each line connects one year’s January and July values; color
+indicates which month was higher, and diamonds mark the two means.
+Right: the mean paired difference with its 90% and 95% confidence
+intervals against the three equivalence margins. At α = .05 equivalence
+corresponds to the 90% interval lying inside a margin.
+
+Stability of the Per-Customer Response
+
+The remaining question is whether the response itself has changed.
+Because customer counts begin in 2007 and carry the discontinuity
+described in the Method, this analysis uses the 220 months from January
+2008 to April 2026, a span of 18 years and 4 months, with sales per
+customer as the outcome. The primary estimates come from pooled models
+interacting both degree-day terms with the centred trend (Models 7 and 8
+in Table 2); Model 6 without interactions is reported alongside. Annual
+slopes fitted separately within each calendar year appear in Figure 11
+as a visualization and an influence check, not as the primary estimate,
+because each rests on 12 observations.
+
+Cooling sensitivity declined in both pooled specifications. The
+CDD-by-trend interaction was -1.74 × 10⁻⁵ per year in Model 7, 95% CI
+[-2.65 × 10⁻⁵, -8.42 × 10⁻⁶], p < .001, and -2.09 × 10⁻⁵ per year in
+Model 8, p < .001. Evaluated at the first and last observations these
+imply declines of 15% and 27%. These are estimates from two
+specifications, not endpoints of a confidence interval. Ordinary and HAC
+inference diverge for Model 7, where the ordinary p value is .070 and
+the HAC p value is .0002; both appear in Table 8. Across maximum lags
+from 3 to 24 months the HAC p value for this coefficient stays at or
+below 0.010 in Model 7 and below .001 in Model 8, so the cooling decline
+does not turn on the lag choice.
+
+The heating interaction was also negative in both models, -5.77 × 10⁻⁶
+per year in Model 7, p = .094, and -8.17 × 10⁻⁶ in Model 8, p = .010.
+The Model 7 interval includes zero and the Model 8 interval does not. A
+nonsignificant heating interaction is not evidence that heating
+sensitivity was constant: the estimate is negative in both models and
+its interval spans declines of practical size.
+
+Whether the cooling decline was proportionally larger than the heating
+decline is a third question, separate from either trend on its own, and
+it is the one that depends on specification. The two trends were
+contrasted on a common proportional scale, comparing each interaction
+coefficient with its own main effect, g = β(CDD × year) ÷ β(CDD) − β(HDD
+× year) ÷ β(HDD), with the standard error from the delta method using
+the full joint HAC covariance. Because the main effects enter the
+denominators, the contrast is evaluated where the trend term is zero.
+The trend is centred at the mean of the estimation window, 2017.125, so
+the comparison is made at the midpoint of the period rather than at
+either endpoint. Centring elsewhere leaves the interaction coefficients
+unchanged but shifts the main effects and therefore the contrast, so the
+reference point is stated rather than left implicit.
+
+In Model 7 the contrast was -0.00298 per year, HAC SE 0.00259, 95% CI
+[-0.00804, +0.00209], p = .250 against a standard normal reference and p
+= .251 against a t reference with 214 residual degrees of freedom. In
+Model 8 it was -0.00676 per year, HAC SE 0.00284, 95% CI [-0.01232,
+-0.00120], p = .017 and p = .018. The difference between the two is not
+an artifact of the lag choice: across maximum lags from 3 to 24 months
+the Model 7 contrast p value ranges from 0.218 to 0.429, and the Model 8
+contrast from 0.017 to 0.043. Evidence that the cooling decline exceeded
+the heating decline depends on whether calendar-month effects are
+included, and this paper does not treat the difference as established.
+
+Table 8
+
+Per-Customer Degree-Day Models and the Proportional-Trend Contrast
+
+  Estimate                        Model 6       Model 7                Model 8
+  ------------------------------- ------------- ---------------------- ----------------------
+  CDD main effect                 1.92 × 10⁻³   1.92 × 10⁻³            1.23 × 10⁻³
+  HDD main effect                 9.41 × 10⁻⁴   9.41 × 10⁻⁴            7.99 × 10⁻⁴
+  CDD × year                      —             -1.74 × 10⁻⁵           -2.09 × 10⁻⁵
+  OLS p                           —             .070                   .002
+  HAC p (normal reference)        —             < .001                 < .001
+  Implied change over window      —             -15.3%                 -26.8%
+  HDD × year                      —             -5.77 × 10⁻⁶           -8.17 × 10⁻⁶
+  OLS p                           —             .270                   .028
+  HAC p (normal reference)        —             .094                   .010
+  Implied change over window      —             -10.6%                 -17.1%
+  Proportional-trend contrast g   —             -0.00298               -0.00676
+  HAC SE                          —             0.00259                0.00284
+  95% CI (normal reference)       —             [-0.00804, +0.00209]   [-0.01232, -0.00120]
+  p (normal / t reference)        —             .250 / .251            .017 / .018
+  Model R²                        .88           .88                    .94
+  Durbin–Watson                   2.09          2.13                   2.13
+
+Note. n = 220 months, January 2008 to April 2026. The outcome is sales
+per residential customer in MWh; main effects are MWh per customer per
+degree day and interactions are MWh per customer per degree day per
+year. The trend is centred at 2017.125, so main effects and the contrast
+are evaluated at the midpoint of the window. Implied change evaluates
+the fitted slope at the first and last observations. HAC standard errors
+use a Bartlett kernel with a 12-month maximum lag.
+
+Figure 11
+
+Annual Per-Customer Response Slopes and the Proportional-Trend Contrast
+
+[]
+
+Note. Left and centre: each point is a slope from a separate regression
+of sales per customer on cooling and heating degree days fitted within
+one calendar year, with 95% ordinary least squares error bars reflecting
+that year’s 12 observations; lines and shaded bands are ordinary least
+squares trends through the annual slopes. Right: the proportional-trend
+contrast from each pooled model with its Newey–West 95% interval and
+normal-reference p value. The annual fits support the figure; the
+estimates in the text come from the pooled models in Table 8.
+
+Table 9 reports how these results respond to the estimation window.
+Excluding the five 2021–22 months identified in Table 1 leaves
+everything essentially unchanged, with the Model 8 contrast at p = .018
+and the Model 7 contrast at p = .305. Beginning in January 2009 leaves
+the cooling decline significant in both models and weakens the Model 8
+contrast to p = .066. Retaining 2007, which the Method rejects, makes
+the apparent cooling decline larger but moves both contrasts well away
+from significance, p = .313 with calendar-month effects. The cooling
+decline is present in every window examined; the contrast is significant
+only with calendar-month effects, and then only for windows beginning in
+2008.
+
+Table 9
+
+Sensitivity of the Per-Customer Results to the Estimation Window
+
+  Window                             n     CDD × year p      Implied cooling change   Contrast p
+  ---------------------------------- ----- ----------------- ------------------------ -------------
+  2008-2026 (primary)                220   < .001 / < .001   -15.3% / -26.8%          .250 / .017
+  2007-2026 (2007 retained)          232   .010 / .005       -21.6% / -31.4%          .346 / .313
+  2009-2026                          208   < .001 / < .001   -15.6% / -26.3%          .432 / .066
+  2008-2026 less 2021-22 anomalies   215   < .001 / < .001   -15.4% / -26.2%          .305 / .018
+
+Note. Each cell reports the value without calendar-month effects (Model
+7 form) and then with them (Model 8 form). All p values are HAC with a
+12-month maximum lag against a standard normal reference. The first row
+is the specification used throughout. No window was chosen on the basis
+of its results.
+
+Robustness
+
+Removing a linear time trend from both series raised the CDD–sales
+correlation from .37 to .45; the correlation on first differences was
+.58 and on twelve-month differences .40. Each transformation removes a
+shared linear or seasonal component and the association persists under
+all three, which is evidence against a purely spurious relationship of
+the kind Granger and Newbold (1974) described. It does not establish
+that no shared influence remains: each transformation removes only the
+component it targets, and inference on transformed series carries its
+own assumptions.
+
+On the matched January 2008 to April 2026 window the CDD correlation was
+.48 for total sales and .47 for sales per customer, so per-customer
+normalization does not by itself change the strength of the association.
+Comparing a per-customer correlation on a short window against a
+total-sales correlation on the full window would confound normalization
+with the change of period. Heating degree days correlated with winter
+sales at .45 and cooling degree days with summer sales at .55; these are
+computed on different months with different predictor distributions and
+cannot rank the sensitivity of the two arms, which is why the arms are
+compared through the joint models instead.
+
+Restricting Model 1 to cooling-season months raised R² to .46 with a
+slope of 6,721 MWh per cooling degree day. Subsetting does not restore
+independence. Residual autocorrelation between genuinely adjacent months
+within the May-to-September blocks, computed across the 144 within-block
+pairs, was .88. The same quantity computed naively across consecutive
+rows of the filtered series is .84, a different number arrived at by
+treating September and the following May as one month apart. The same
+error affects HAC estimation on filtered data. A naive Newey–West
+standard error for the Model 5 slope is 396.1. Forming lag products only
+within a single May-to-September block gives 354.7, which avoids that
+error but discards pairs lying genuinely within twelve months of each
+other across a year boundary. Using the actual calendar distance between
+the retained months, so that all 885 eligible ordered pairs contribute
+at their Bartlett weights (525 of them cross-year and 360 within-year),
+gives 340.3, against an ordinary standard error of 548.3. The
+calendar-distance figure is the one reported in Table 4. Model 5 remains
+a descriptive comparison with earlier degree-day work and carries no
+substantive claim in this paper.
+
+Residual diagnostics appear in Appendix Figures A1 through A3. Model 1
+residuals are strongly autocorrelated (lag-1 .73, lag-12 .86,
+Durbin–Watson 0.53). Model 3 reduces the lag-1 value to .26 but retains
+a seasonal component of .66 at lag 12; Model 4 reduces the lag-12 value
+to .52. Seasonal dependence therefore persists in every specification,
+which is why HAC standard errors are used throughout and why no claim
+here rests on ordinary inference.
+
+Breusch–Pagan statistics depend on which regressors enter the auxiliary
+variance regression, so both variants are reported rather than one. For
+Model 1, regressing squared residuals on CDD gives LM = 2.71 on 1 degree
+of freedom, p = .10. For Model 3, regressing squared residuals on CDD
+and HDD gives LM = 6.62 on 2 degrees of freedom, p = .037, while
+including the trend as well gives LM = 11.26 on 3 degrees of freedom, p
+= .010. The variant including all three regressors is the one that
+matches the fitted model and is the more appropriate of the two. A
+nonsignificant result would not establish constant variance in any case,
+and misspecification of the conditional mean and non-constant variance
+can coexist. These chi-square references assume independent errors and
+are therefore not dependence-robust; they are reported as an indication
+rather than a decisive test, and the HAC estimator used throughout is
+robust to both problems.
+
+Figure 12
+
+Monthly Residential Electricity Sales, January 1990 to April 2026
+
+[]
+
+Note. The curve is a locally weighted smoothing trend shown for
+description only. Two peaks appear each year, in winter and in summer,
+against long-run growth in the level of sales.
+
+Discussion
+
+A cooling-only degree-day model describes residential electricity demand
+in North Carolina poorly, and the reason is that it omits one arm of a
+two-armed relationship rather than that the cooling relationship is
+weak. Adding heating degree days raised explained variance from .14 to
+.48; adding a linear trend raised it further to .85. The two additions
+contribute comparable increments, and the second is attributable to the
+time trend rather than to weather. The cooling coefficient also moves
+substantially: the Model 3 estimate lies 164% above the Model 1
+estimate, which is the same gap as saying the Model 1 estimate lies 62%
+below it. In a state where a large share of households heat with
+electricity, the heating term is not a scope limitation that leaves the
+cooling coefficient intact.
+
+The comparison of model-implied components is the result most sensitive
+to specification. Under a linear trend the heating component exceeds the
+cooling component by about 7%; once calendar-month effects absorb what
+is common to a given month across years, the gap widens to about 45%.
+Both specifications are defensible and they identify the coefficients
+from different variation, so the summary is an ordering together with a
+range across the specifications examined, not a point estimate and not a
+bound. What survives is that weather-driven heating and cooling are of
+comparable magnitude in this state, each accounting for roughly a sixth
+to a quarter of annual residential sales depending on specification,
+with heating the larger of the two.
+
+The slope ratio should not be read thermodynamically. An air conditioner
+and a heat pump both move heat through a vapour-compression cycle and
+both deliver more thermal energy than the electrical energy they
+consume, so no contrast between a purely electric load and a heat pump
+explains why a cooling degree day is associated with more electricity
+than a heating degree day. A compositional explanation is plausible in
+principle, because a heating degree day reaches the electric load most
+strongly in homes heated by electricity, while nearly all homes in the
+South cool with electricity (EIA, 2022). It is not confined to them:
+homes heated by combustion still draw electricity for blowers, pumps,
+and controls. The explanation cannot be quantified from the sources used
+here. The 2020 Residential Energy Consumption Survey reports main
+heating equipment, not main heating fuel: 38% of North Carolina housing
+units use a central heat pump and 50% use a furnace, but the survey
+table does not break furnaces down by fuel, and homes using electric
+resistance heating fall into an equipment category the table does not
+show separately (EIA, 2023a). The share of North Carolina homes heating
+with electricity is therefore larger than the heat-pump share by an
+amount these data do not determine, and homes heated by combustion still
+draw electricity for blowers and controls. No numerical account of the
+slope ratio is offered. Other unquantified contributors point the same
+way: the 65 °F base may not match the effective balance point for either
+mode, latent cooling loads in a humid climate are not captured by
+dry-bulb degree days, and heat pumps lose efficiency and engage
+resistance backup at low outdoor temperatures. This study estimates an
+aggregate association and identifies none of these mechanisms.
+
+For context on where the state sits, the same survey puts North
+Carolina’s central heat-pump share (38%) below South Carolina (41%) and
+Alabama (39%) and above Tennessee (35%) and Florida (31%), among the
+higher shares nationally. Differences between states of this size may
+not be statistically significant in the survey, and the figures describe
+equipment rather than fuel.
+
+The seasonal results support a two-peaked description of the annual
+cycle without supporting stronger claims. July and January mean monthly
+sales are statistically equivalent within an exploratory margin of ±0.4
+standard deviations, and winter and summer seasonal means are not
+distinguishable. These are statements about mean monthly energy for
+particular months. They do not concern seasonal maxima, hourly peak
+demand, or generating capacity, and nothing in this design ranks the two
+seasons on those quantities: two months with comparable megawatt-hours
+can impose very different maximum megawatt demands. Statewide
+residential sales also do not measure the whole-system demand of any
+particular utility across both Carolinas.
+
+Three distinct claims should be separated in reading the stability
+results. First, per-customer cooling sensitivity declined over January
+2008 to April 2026; this held in both pooled specifications, at every
+maximum lag examined, and in every estimation window tried. Second,
+per-customer heating sensitivity also declined; the point estimate is
+negative in both models, significantly so once calendar-month effects
+are included. Third, whether the cooling decline was proportionally
+larger than the heating decline is not settled: the contrast is
+significant with calendar-month effects and not without them, and the
+choice between those specifications is a modelling judgement rather than
+something the data resolve. The paper therefore reports a general
+decline in per-customer weather sensitivity as supported and the
+asymmetry between the two arms as specification-dependent.
+
+A fourth claim, an explanation for any of these declines, is not
+attempted. Several mechanisms could produce them: turnover of heating
+and cooling equipment under tightening federal minimum efficiency
+standards, which rose for central air conditioners in 2006, again for
+southern states in 2015, and again under the SEER2 test procedure in
+2023 (Air-Conditioning, Heating, and Refrigeration Institute, 2023);
+improvements to building shells; changes in household size, dwelling
+size, or occupancy; behavioural response to rising prices; and
+compositional change in the customer base as the state grows. This
+design measures none of them. A South-wide air conditioning prevalence
+statistic does not establish North Carolina’s own adoption history,
+which would be needed to argue that saturation rather than efficiency
+explains the pattern. Average revenue per kilowatt-hour, the only
+price-like variable available here, is total revenue divided by total
+sales, so it mixes rate changes with shifts in the composition of
+consumption and is mechanically related to the outcome; adding it does
+not remove price-related confounding.
+
+A declining per-customer coefficient also does not mean falling
+electricity use. The coefficient describes response per degree day for
+the average customer, while the customer base grew from 4,120,654 in
+January 2008 to 5,229,187 in April 2026. Total weather-driven
+consumption can rise while per-customer sensitivity falls.
+
+Conclusion
+
+Cooling degree days are positively associated with monthly residential
+electricity sales in North Carolina, but a model built on them alone
+answers a narrower question than it appears to. Adding heating degree
+days raises explained variance from .14 to .48, and adding a linear time
+trend raises it to .85; the second increment reflects long-run growth
+rather than weather, and the cooling coefficient changes substantially
+across the two steps. The model-implied heating and cooling components
+of annual sales are of comparable magnitude, with heating the larger in
+every specification examined, though the size of the gap ranges from
+about 7% to about 45% depending on how calendar-month variation is
+handled. July and January mean monthly sales are statistically
+equivalent within an exploratory margin. Per-customer sensitivity to
+degree days declined between January 2008 and April 2026, clearly for
+cooling and less certainly for heating, and whether the cooling decline
+was proportionally the larger of the two depends on the specification.
+All of these are associations estimated in sample from statewide monthly
+energy totals. They are not forecasts, and they do not speak to peak
+power or capacity requirements.
+
+Limitations
+
+The design is observational and uses statewide aggregates, so
+county-level variation in climate, housing stock, and rates is invisible
+and no causal effect is identified. nClimDiv statewide degree days are
+area-weighted rather than population-weighted, so the predictor differs
+from the demand-relevant exposure. This is a form of measurement error,
+but its direction is not established here: the discrepancy is systematic
+rather than classical, no error model has been fitted, and it should not
+be assumed to attenuate the slopes.
+
+Residual seasonal dependence persists in every specification. HAC
+standard errors address inference under that dependence; they do not
+repair a misspecified conditional mean, and no dynamic model of the
+residual structure was estimated. The linear trend in Model 3 is a crude
+proxy for customer growth, income, prices, appliance efficiency, and
+building stock, none of which is separately identified. The per-customer
+analyses cover January 2008 onward and cannot say how the arms behaved
+before then; the 2007 observations were excluded because the
+sales-per-customer ratio is discontinuous at January 2008, and the cause
+of that discontinuity is suspected rather than documented. The 2021–22
+months whose customer counts move by more than 2% are retained and do
+not materially affect the results, but they are unexplained.
+
+EIA-861M reports recent months as preliminary and revises them; the
+final months of this extract could not be compared against a later
+vintage, though dropping the last three months leaves the Model 3
+component ratio at 1.07. The identification of state code 031 as North
+Carolina follows from the file layout and the internal consistency of
+the three element codes, and was not confirmed against an independently
+retrieved NCEI state-code table. Seasonal means use all available
+months, so Winter and Spring each draw on one more year than Summer and
+Fall; restricting to complete calendar years shifts the Winter mean by
+-31,323 MWh and leaves the between-season variance share at .33 against
+.33.
+
+Every coefficient of determination reported here is an in-sample fit to
+the months used for estimation. The paper makes no forecasting claim.
+Establishing forecasting accuracy would require chronological validation
+on held-out later months, ideally with rolling-origin evaluation,
+comparison against a seasonal-naïve baseline and a calendar-and-trend
+model carrying no weather information, and a distinction between
+predictions built on observed degree days and forecasts built on
+forecast degree days.
+
+Future Research
+
+Four extensions follow directly. A regression with seasonal
+autoregressive errors would model the residual dependence rather than
+correcting inference after the fact, and would test whether the
+component estimates are sensitive to that structure. County-level or
+balancing-authority data would recover spatial variation and permit
+population-weighted degree days. Hourly or daily load data would allow
+the peak-power questions this monthly design cannot address. Repeating
+the stability analysis across southern states with differing
+electric-heating shares and equipment histories, using heating-fuel
+rather than heating-equipment data, would help distinguish the
+mechanisms this study can only list.
+
+Data and Code Availability
+
+All data are public. Degree days and mean temperature come from the NOAA
+nClimDiv statewide files climdiv-cddcst, climdiv-hddcst, and
+climdiv-tmpcst, version 1.0.0 dated June 4, 2026, downloaded June 2026
+and filtered to state code 031, with −9999 recoded as missing.
+Electricity sales, customer counts, and average revenue per
+kilowatt-hour come from EIA Form EIA-861M extracts for January 1990
+through December 2009 and January 2010 onward, downloaded June 2026 and
+filtered to North Carolina, residential sector.
+
+The merge is a one-to-one inner join on year and month yielding 436
+consecutive months with no duplicate keys, no interior gaps, and no
+negative degree-day values. Customer counts are present for 232 months
+from January 2007, of which the 220 months from January 2008 are used.
+Annual quantities use the 36 complete calendar years.
+
+The analyses reported here were executed in Python 3.10.12 with NumPy
+2.2.6 and pandas 2.3.3. SciPy and statsmodels were not available in the
+analysis environment, so tail probabilities for the t, F, and chi-square
+distributions come from routines written for this project; those
+routines are checked against published critical values by an
+accompanying validation script, which passes forty comparisons. An R
+implementation of the same workflow accompanies the manuscript but has
+not been executed and is offered as a convenience rather than as a
+replication. The supplementary materials comprise the analysis scripts,
+the validation script, the analysis-ready monthly panel, the
+annual-slope table, a machine-readable results file, execution logs, and
+a verification report.
+
+References
+
+Air-Conditioning, Heating, and Refrigeration Institute. (2023). 2023
+energy efficiency standards.
+https://www.ahrinet.org/2023-energy-efficiency-standards
+
+Cawthorne, D., de Queiroz, A. R., Eshraghi, H., Sankarasubramanian, A.,
+& DeCarolis, J. F. (2021). The role of temperature variability on
+seasonal electricity demand in the Southern US. Frontiers in Sustainable
+Cities, 3, Article 644789. https://doi.org/10.3389/frsc.2021.644789
+
+Colelli, F. P., Wing, I. S., & De Cian, E. (2023). Air-conditioning
+adoption and electricity demand highlight climate change
+mitigation–adaptation tradeoffs. Scientific Reports, 13(1), Article
+4413. https://doi.org/10.1038/s41598-023-31469-z
+
+Duke Energy. (2025, October 1). Duke Energy files 2025 Carolinas
+Resource Plan, continues modernizing energy infrastructure to support
+future growth [Press release].
+https://news.duke-energy.com/releases/duke-energy-files-2025-carolinas-resource-plan-continues-modernizing-energy-infrastructure-to-support-future-growth
+
+Fache, A., & Bhat, M. G. (2024). Temperature sensitive electricity
+demand and policy implications for energy transition: A case study of
+Florida, USA. Frontiers in Sustainable Energy Policy, 2, Article
+1271035. https://doi.org/10.3389/fsuep.2023.1271035
+
+Granger, C. W. J., & Newbold, P. (1974). Spurious regressions in
+econometrics. Journal of Econometrics, 2(2), 111–120.
+https://doi.org/10.1016/0304-4076(74)90034-7
+
+Hu, W., Scholz, Y., Yeligeti, M., Deng, Y., & Jochem, P. (2024). Future
+electricity demand for Europe: Unraveling the dynamics of the
+Temperature Response Function. Applied Energy, 368, Article 123387.
+https://doi.org/10.1016/j.apenergy.2024.123387
+
+Kunkel, K. E., Easterling, D. R., Ballinger, A., Bililign, S., Champion,
+S. M., Corbett, D. R., Dello, K. D., Dissen, J., Lackmann, G. M.,
+Luettich, R. A., Jr., Perry, L. B., Robinson, W. A., Stevens, L. E.,
+Stewart, B. C., & Terando, A. J. (2020). North Carolina climate science
+report. North Carolina Institute for Climate Studies.
+https://ncics.org/nccsr
+
+Lakens, D. (2017). Equivalence tests: A practical primer for t tests,
+correlations, and meta-analyses. Social Psychological and Personality
+Science, 8(4), 355–362. https://doi.org/10.1177/1948550617697177
+
+Li, M., Allinson, D., & He, M. (2018). Seasonal variation in household
+electricity demand: A comparison of monitored and synthetic daily load
+profiles. Energy and Buildings, 179, 292–300.
+https://doi.org/10.1016/j.enbuild.2018.09.030
+
+National Oceanic and Atmospheric Administration. (2026). nClimDiv
+statewide cooling degree days, heating degree days, and average
+temperature (Version 1.0.0, 2026-06-04) [Data set]. National Centers for
+Environmental Information.
+https://www.ncei.noaa.gov/pub/data/cirs/climdiv/
+
+Newey, W. K., & West, K. D. (1987). A simple, positive semi-definite,
+heteroskedasticity and autocorrelation consistent covariance matrix.
+Econometrica, 55(3), 703–708. https://doi.org/10.2307/1913610
+
+U.S. Energy Information Administration. (2018, July 23). Air
+conditioning accounts for about 12% of U.S. home energy expenditures.
+Today in Energy. https://www.eia.gov/todayinenergy/detail.php?id=36692
+
+U.S. Energy Information Administration. (2022, May 31). Nearly 90% of
+U.S. households used air conditioning in 2020. Today in Energy.
+https://www.eia.gov/todayinenergy/detail.php?id=52558
+
+U.S. Energy Information Administration. (2023a). Highlights for space
+heating in U.S. homes by state, 2020 [Data tables]. Residential Energy
+Consumption Survey.
+https://www.eia.gov/consumption/residential/data/2020/state/pdf/State%20Space%20Heating.pdf
+
+U.S. Energy Information Administration. (2023b). Units and calculators
+explained: Degree days.
+https://www.eia.gov/energyexplained/units-and-calculators/degree-days.php
+
+U.S. Energy Information Administration. (2024, March 15). How much
+electricity is used for air conditioning in the United States?
+Frequently Asked Questions.
+https://www.eia.gov/tools/faqs/faq.php?id=1174&t=1
+
+U.S. Energy Information Administration. (2026). Form EIA-861M: Monthly
+electric power industry report [Data set].
+https://www.eia.gov/electricity/data/eia861m/
+
+Appendix
+
+Residual Diagnostics
+
+This appendix presents residual diagnostics for the cooling-only
+baseline (Model 1) and for the two specifications that carry the
+substantive results (Models 3 and 4), together with a normality check
+for the paired comparison.
+
+Figure A1
+
+Residual Diagnostics for Model 1 (Cooling Degree Days Only)
+
+[]
+
+Note. Panel A plots residuals against fitted values; Panel B the
+residual distribution with a matched normal curve; Panel C the normal
+quantile–quantile plot; Panel D the residual autocorrelation function
+with 95% bounds for white noise. The lag-1 residual autocorrelation is
+.73 and the seasonal value at lag 12 is .86. The dense column in Panel A
+contains the zero-CDD months, which the model maps to a single fitted
+value.
+
+Figure A2
+
+Residual Diagnostics for Model 3 (Cooling and Heating Degree Days With a
+Linear Trend)
+
+[]
+
+Note. Panel A plots residuals against fitted values; Panel B the
+residual distribution with a matched normal curve; Panel C the normal
+quantile–quantile plot; Panel D the residual autocorrelation function
+with 95% bounds for white noise. The lag-1 value falls to .26 and
+Durbin–Watson rises to 1.47, but a seasonal component of .66 remains at
+lag 12.
+
+Figure A3
+
+Residual Diagnostics for Model 4 (Model 3 Plus Calendar-Month Fixed
+Effects)
+
+[]
+
+Note. Panel A plots residuals against fitted values; Panel B the
+residual distribution with a matched normal curve; Panel C the normal
+quantile–quantile plot; Panel D the residual autocorrelation function
+with 95% bounds for white noise. Calendar-month effects reduce the
+lag-12 value to .52. Residual dependence is reduced but not eliminated
+in any specification.
+
+Figure A4
+
+Normal Q–Q Plot of the July–January Paired Differences
+
+[]
+
+Note. The line marks agreement with a normal distribution, fitted
+through the first and third quartiles. No marked departure is evident,
+supporting the normality assumption of the paired t test and the
+equivalence tests. This plot assesses the distribution of the
+differences, not their independence, which is addressed in the text.
