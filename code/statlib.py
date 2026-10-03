@@ -28,7 +28,6 @@ def _betacf(a, b, x, itmax=300, eps=3e-16):
     return h
 
 def betai(a, b, x):
-    """Regularized incomplete beta I_x(a,b)."""
     if x <= 0: return 0.0
     if x >= 1: return 1.0
     lbeta = math.lgamma(a+b)-math.lgamma(a)-math.lgamma(b)
@@ -38,7 +37,6 @@ def betai(a, b, x):
     return 1.0 - bt*_betacf(b, a, 1.0-x)/b
 
 def t_sf(t, df):
-    """P(T > t) upper tail."""
     x = df/(df+t*t)
     p_two = betai(df/2.0, 0.5, x)
     return p_two/2.0 if t > 0 else 1.0 - p_two/2.0
@@ -51,7 +49,6 @@ def t_p_two(t, df):
     return betai(df/2.0, 0.5, x)
 
 def f_sf(f, d1, d2):
-    """P(F > f)."""
     if f <= 0: return 1.0
     x = d2/(d2+d1*f)
     return betai(d2/2.0, d1/2.0, x)

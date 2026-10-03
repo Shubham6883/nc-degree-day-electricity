@@ -1,4 +1,3 @@
-"""Data loading and estimation utilities."""
 import sys, math, calendar
 from pathlib import Path
 import numpy as np, pandas as pd
@@ -105,7 +104,6 @@ class OLS:
 
 
 def gls_ar1(y, X):
-    """Cochrane-Orcutt AR(1) FGLS, one iteration to convergence."""
     y = np.asarray(y, float); X = np.asarray(X, float)
     b, *_ = np.linalg.lstsq(X, y, rcond=None)
     rho = 0.0
@@ -133,7 +131,6 @@ def fmt_p(p, apa=True):
 
 
 def nz(x, d=2):
-    """APA number with no leading zero."""
     s = f'{x:.{d}f}'
     return s.replace('0.', '.', 1) if s.startswith('0.') else s.replace('-0.', '-.', 1)
 
