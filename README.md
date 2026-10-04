@@ -1,5 +1,7 @@
 # NC degree days and residential electricity sales
 
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.23129080.svg)](https://doi.org/10.5281/zenodo.23129080)
+
 Code, data, and results for *Two Arms of One Curve: Cooling and Heating Degree Days and Monthly Residential Electricity Sales in North Carolina, 1990-2026* by Shubham Jalan.
 
 The study regresses the log of monthly statewide residential electricity sales on cooling and heating degree days, with and without a time trend and calendar-month effects, compares the heating and cooling parts of annual sales, and tests whether the per-customer response has changed since 2008. All results describe associations in monthly energy (MWh). They are not forecasts and say nothing about peak power.
@@ -35,6 +37,10 @@ From inside `code/`:
     python3 figures.py     # writes figures/fig*.png
 
 Standard errors are Newey-West (Bartlett kernel, 12-month lag). Resampling uses seed 20260913.
+
+## Citation
+
+Jalan, S. (2026). *Two arms of one curve: Cooling and heating degree days and monthly residential electricity sales in North Carolina, 1990-2026* [Preprint]. Zenodo. https://doi.org/10.5281/zenodo.23129080
 
 ## Licenses
 
